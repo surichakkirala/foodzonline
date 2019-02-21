@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { TotalvaluesService } from '../totalvalues.service';
 
 @Component({
   selector: 'app-order',
@@ -13,12 +14,13 @@ export class OrderComponent implements OnInit {
   totalCount;
   totalAmount;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router , private totalValues:TotalvaluesService) { }
 
   ngOnInit() {
     this.selectedItems = JSON.parse(localStorage.getItem('selectedItems'));
     if ( this.selectedItems ) {
       this.getTotalValues();
+      // [this.totalAmount , this.totalCount] = this.totalValues.getTotalValue(this.selectedItems);
     }
     this.details = {
       firstName : new FormControl(''),
@@ -31,23 +33,25 @@ export class OrderComponent implements OnInit {
       phone : new FormControl('')
     };
   }
-  increaceItem(item, index) {
+  increaseItem(item, index) {
     this.selectedItems[index].count ++;
     this.selectedItems[index].totalAmount = this.selectedItems[index].count * this.selectedItems[index].price;
     this.getTotalValues();
-
+    // [this.totalAmount , this.totalCount] = this.totalValues.getTotalValue(this.selectedItems);
   }
   decreaseItem(item, index) {
 
     if ( item.count === 1) {
       this.selectedItems.splice(index, 1);
     this.getTotalValues();
+    // [this.totalAmount , this.totalCount] = this.totalValues.getTotalValue(this.selectedItems);
       return true;
     }
     this.selectedItems[index].count --;
     this.selectedItems[index].totalAmount = this.selectedItems[index].count * this.selectedItems[index].price;
     this.getTotalValues();
-
+    // [this.totalAmount , this.totalCount] = this.totalValues.getTotalValue(this.selectedItems);
+    console.log("Inside Order:", this.totalAmount)
   }
   getTotalValues() {
     const totalAmount = this.selectedItems.map((item) => {

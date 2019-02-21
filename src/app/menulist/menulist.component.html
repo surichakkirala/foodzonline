@@ -1,0 +1,21 @@
+<div class="table-head-border w-20"></div>
+  <div class="m-l-40">
+        <p> {{menuTitle}} </p>
+    <table class="m-l-40 home-table">
+          <tr>
+            <td></td>
+            <td> Item Name</td>
+            <td>Price</td>
+            <td></td>
+          </tr>
+        </table>
+        <div class="table-head-border"></div>
+        <table class="m-l-40 home-table">
+          <tr *ngFor = "let item of menuItems let i = index">
+              <td>{{i + 1}}</td>
+              <td> {{item.name}}</td>
+              <td>{{item.price}}</td>
+              <td><span class="span-button" (click)="addItem(item)">[+]</span> &nbsp;&nbsp; <span class="span-button" (click)="removeItem(item ,i)">[-]</span></td>
+          </tr>
+        </table>
+</div>

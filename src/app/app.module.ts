@@ -8,12 +8,16 @@ import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ReceiptComponent } from './receipt/receipt.component';
+import { MenulayoutComponent } from './menulayout/menulayout.component';
+import { MenulistComponent } from './menulist/menulist.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     OrderComponent,
-    ReceiptComponent
+    ReceiptComponent,
+    MenulayoutComponent,
+    MenulistComponent
   ],
   imports: [
     BrowserModule,
