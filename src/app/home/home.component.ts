@@ -26,11 +26,30 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/order']);
   }
 
-  itemsSelected(selectedItems){
-    this.selectedItems = selectedItems;
+  itemsSelected(item){
+    const selectedItems = this.selectedItems.filter(selItem => {
+      return selItem.name === item.name;
+    });
+    this.checkForSelectedItem(selectedItems,item);
     [this.totalAmount , this.totalCount] = this.totalValues.getTotalValue(this.selectedItems);
   }
-  
+  checkForSelectedItem(selectedItems,item){
+    selectedItems.length === 0 ? this.newItem(item) : this.existingItem(item)
+  }
+  newItem(item){
+    const selectedItem = {...item};
+    selectedItem.count = 1;
+    selectedItem.totalAmount = selectedItem.count * selectedItem.price;
+    this.selectedItems.push(selectedItem);
+  }
+  existingItem(item){
+    this.selectedItems.map(selItem => {
+      if (selItem.name === item.name ) {
+        selItem.totalAmount = (selItem.count+1) * selItem.price;
+        return selItem.count++;
+      }
+    });
+  }
   increaseItem(item, index) {
     this.selectedItems[index].count ++;
     this.selectedItems[index].totalAmount = this.selectedItems[index].count * this.selectedItems[index].price;

@@ -9,8 +9,10 @@
 <app-menulayout title="Menu">
      
 </app-menulayout>
+<div>
 <app-menulist menuTitle="North Menu" [menuItems]="northItems" (selectedCourse) ="itemsSelected($event)"></app-menulist>  
-
+<app-menulist menuTitle="South Menu" [menuItems]="southItems" (selectedCourse) ="itemsSelected($event)"></app-menulist>  
+</div>
   <div class= "home-right">
     <div>
         <p> Order </p>
